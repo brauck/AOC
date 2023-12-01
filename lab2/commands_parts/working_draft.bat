@@ -1,7 +1,7 @@
 @ECHO off
+
 if not exist help.txt (help > help.txt)
 IF exist lines.bat (del lines.bat)
-::wfa calc notepad asdfafa dir /b /a  pause afdafgjkr calc for if
 
 set isArgument=false
 set line=%1
@@ -11,6 +11,15 @@ shift
 ::Check if an attribute is a command
 :exe
 if "%1"=="" goto execute
+
+::Check if extension of argument equal .exe
+set ifExe=.ext
+set ext=%~x1
+if defined ext (set ifExe=%ext%)
+if %ifExe% == .exe (
+  set isArgument=false  
+  goto string
+)
 
 :: Check if an argument cotains slash (/)
 set atr=%1
@@ -60,6 +69,7 @@ shift
 goto exe
 
 :execute
+::echo last line
 echo %line% >> lines.bat
 echo pause >> lines.bat
 echo %errorlevel%
