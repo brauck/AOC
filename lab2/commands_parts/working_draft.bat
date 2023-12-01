@@ -6,6 +6,8 @@ IF exist lines.bat (del lines.bat)
 set isArgument=false
 set line=%1
 
+shift
+
 ::Check if an attribute is a command
 :exe
 if "%1"=="" goto execute
@@ -58,6 +60,7 @@ shift
 goto exe
 
 :execute
+echo %line% >> lines.bat
 echo pause >> lines.bat
 echo %errorlevel%
 ::call lines.bat
