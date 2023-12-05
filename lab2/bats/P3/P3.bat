@@ -33,6 +33,7 @@ if not x%atr:/=%==x%atr% (
   goto string
 )
 
+:: The programm with this command may exit with errorlevel 1
 where /q %1
 
 if %errorlevel% == 0 (
