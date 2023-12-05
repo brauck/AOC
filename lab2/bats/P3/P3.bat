@@ -1,3 +1,4 @@
+@chcp 65001
 @echo off
 
 if not exist help.txt (help > help.txt)
@@ -77,7 +78,12 @@ goto exe
 ::Echo last line
 echo %line% >> lines.bat
 echo pause >> lines.bat
-echo %errorlevel%
+::echo %errorlevel%
 call lines.bat
 del help.txt
 echo programm completed successful
+
+:: As command `where` may set errorlevel > 0,
+:: the programm explicitly exits with 0,
+:: because thats not an error.
+exit /b 0

@@ -1,3 +1,4 @@
+@chcp 65001
 @echo off
 
 if not exist help.txt (help > help.txt)
@@ -76,11 +77,14 @@ goto exe
 :execute
 ::insert last line
 set arr[%arrLength%]=%line%
-echo %arrLength%
+::echo %arrLength%
 
 setlocal enabledelayedexpansion
 for /l %%n in (0,1,%arrLength%) do ( 
    echo !arr[%%n]!
+)
+
+for /l %%n in (0,1,%arrLength%) do ( 
    !arr[%%n]!
 )
 endlocal
