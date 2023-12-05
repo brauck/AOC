@@ -85,5 +85,5 @@ echo programm completed successful
 
 :: As command `where` may set errorlevel > 0,
 :: the programm explicitly exits with 0,
-:: because thats not an error.
+:: because thats not an error of the programm.
 exit /b 0

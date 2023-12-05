@@ -67,7 +67,6 @@ if %isArgument% == true (
   goto exe
 )
 
-::echo %line% >> lines.bat
 set arr[%arrLength%]=%line%
 set /a arrLength+=1
 set line=%1
