@@ -10,7 +10,7 @@ shift
 
 ::Check if an argument is a command
 :exe
-if "%1"=="" goto execute
+if [%1]==[] goto execute
 
 ::Check if extension of argument is equal .exe
 set ifExe=.ext
@@ -18,6 +18,11 @@ set ext=%~x1
 if defined ext (set ifExe=%ext%)
 if %ifExe% == .exe (
   set isArgument=false  
+  goto string
+)
+
+if defined ext (
+  set isArgument=true  
   goto string
 )
 
