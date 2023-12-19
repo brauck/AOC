@@ -1,3 +1,4 @@
+@chcp 65001
 @echo off
 call P5.bat Редактор
 call P5.bat Память /m

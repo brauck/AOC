@@ -1,3 +1,4 @@
+@chcp 65001
 @echo off
 echo +++++++++++++++++++++++++++++++++++++++
 call P11.bat "C:\Programs" "C:\Users"
