@@ -25,7 +25,7 @@ if defined ext (goto isArgumentTrue)
 set atr=%1
 if not x%atr:/=%==x%atr% (goto isArgumentTrue)
 
-:: The programm with this command may exit with errorlevel 1
+:: The programm with this command may exit with errorlevel > 0
 where /q %1
 
 if %errorlevel% == 0 (goto isArgumentFalse) else (goto cmd)

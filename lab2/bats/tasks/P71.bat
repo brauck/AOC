@@ -26,12 +26,9 @@ if defined ext (goto isArgumentTrue)
 set atr=%1
 if not x%atr:/=%==x%atr% (goto isArgumentTrue)
 
-:: Quiet mode
-::where /q %1
+where /q %1
 
-set command=
-for /f usebackq %%f in (`where %1`) do (set command=%%f)
-IF defined command (goto isArgumentFalse) else (goto cmd)
+if %errorlevel% == 0 (goto isArgumentFalse)
 
 :: Check if an attribute is a built in command to cmd.exe
 :cmd
@@ -63,11 +60,13 @@ set arr[%arrLength%]=%line%
 
 setlocal enabledelayedexpansion
 for /l %%n in (0,1,%arrLength%) do ( 
-   echo !arr[%%n]!
+  echo !arr[%%n]!
 )
 
 for /l %%n in (0,1,%arrLength%) do ( 
-   !arr[%%n]!
+  echo Запуск программы: !arr[%%n]!
+  timeout /t 3 /nobreak
+  !arr[%%n]!
 )
 endlocal
 
