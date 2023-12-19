@@ -2,11 +2,10 @@
 @echo off
 
 if not exist help.txt (help > help.txt)
+if exist lines.bat (del lines.bat)
 
 set isArgument=false
-set /a arrLength=0
 set line=%1
-set arr[]=
 
 shift
 
@@ -14,50 +13,33 @@ shift
 :exe
 if [%1]==[] goto execute
 
-::Check if extension of argument equal .exe
+::Check if extension of argument is equal .exe
 set ifExe=.ext
 set ext=%~x1
 if defined ext (set ifExe=%ext%)
-if %ifExe% == .exe (
-  set isArgument=false  
-  goto string
-)
+if %ifExe% == .exe (goto isArgumentFalse)
 
-if defined ext (
-  set isArgument=true  
-  goto string
-)
+if defined ext (goto isArgumentTrue)
 
 :: Check if an argument cotains slash (/)
 set atr=%1
-if not x%atr:/=%==x%atr% (
-  set isArgument=true
-  goto string
-)
+if not x%atr:/=%==x%atr% (goto isArgumentTrue)
 
 :: Quiet mode
 ::where /q %1
 
 set command=
 for /f usebackq %%f in (`where %1`) do (set command=%%f)
-IF defined command (
-  set isArgument=false  
-  goto string 
-  ) else (goto cmd)
+IF defined command (goto isArgumentFalse) else (goto cmd)
+
 :: Check if an attribute is a built in command to cmd.exe
 :cmd
 set str=
-for /f usebackq %%F in (`findstr /b /i /c:"%1  " help.txt`) do (
-  set str=%%F
+for /f usebackq %%f in (`findstr /b /i /c:"%1  " help.txt`) do (
+set str=%%f
 )
 
-if defined str (  
-  set isArgument=false
-  goto string
-  ) else (  
-  set isArgument=true
-  goto string
-)
+if defined str (goto isArgumentFalse) else (goto isArgumentTrue)
 
 :: Form command line with arguments
 :string
@@ -90,3 +72,12 @@ endlocal
 
 del help.txt
 echo programm completed successful
+exit /b 0
+
+:isArgumentTrue
+set isArgument=true
+goto string
+
+:isArgumentFalse
+set isArgument=false  
+goto string
