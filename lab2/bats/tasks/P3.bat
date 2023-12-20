@@ -1,3 +1,4 @@
+@chcp 65001
 @echo off
 set /a count=0
 
